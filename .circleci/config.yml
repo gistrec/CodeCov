@@ -8,10 +8,13 @@ jobs:
             - checkout
             - run:
                 name: Building sample
-                command: g++ main.cpp -std=c++14 -o Sample
+                command: g++ main.cpp -fprofile-arcs -ftest-coverage -o Sample
             - run:
                 name: Running sample
                 command: ./Sample
+            - run:
+                name: Getting code coverage
+                command: gcov -n -o . main.cpp
             - run:
                 name: Uploading code cov
                 command: bash <(curl -s https://codecov.io/bash)
