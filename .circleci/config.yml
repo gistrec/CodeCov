@@ -1,0 +1,19 @@
+version: 2
+jobs:
+    samples:
+        working_directory: ~/root
+        docker:
+            - image: gcc:latest
+        steps:
+            - checkout
+            - run:
+                name: Building sample
+                command: g++ main.cpp -std=c++14 -o Sample
+            - run:
+                name: Running sample
+                command: ./Sample
+workflows:
+    version: 2
+    build_and_test:
+        jobs:
+            - samples
